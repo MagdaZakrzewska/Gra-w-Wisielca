@@ -1,7 +1,6 @@
 package HangmanGame;
 
 import java.util.Arrays;
-import java.util.Random;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -93,8 +92,7 @@ public class NowaGra {
     }
 
         private void initializeGame(){
-            Random random = new Random();
-            word = bazaSlow.getWords().get(random.nextInt(bazaSlow.getWords().size()));
+            word = bazaSlow.getRandomWord();
             userWord = new char[word.length()];
             Arrays.fill(userWord,'_');
             gameEnded = false;
@@ -102,7 +100,7 @@ public class NowaGra {
         }
 
         private void checkLetter(char letter, Label info, Label secretWord, Label tryLabel){
-            
+            letter = Character.toLowerCase(letter);
             boolean foundLetter = false;
             for (int i = 0; i < word.length(); i++){
                 if(word.charAt(i) == letter){
@@ -160,7 +158,7 @@ public class NowaGra {
                 gameEnded = false;
                 }
 
-                private void updateHangmanImage(int stage) {
+            private void updateHangmanImage(int stage) {
                     String imagePath = "images/hangman" + stage + ".png";
                     Image image = new Image(getClass().getResourceAsStream(imagePath));
                     imageView.setImage(image);
